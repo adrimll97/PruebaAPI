@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_26_113122) do
+ActiveRecord::Schema.define(version: 2021_06_26_144409) do
+
+  create_table "comunicados", force: :cascade do |t|
+    t.integer "creador_id"
+    t.integer "receptor_id"
+    t.string "asunto"
+    t.string "contenido"
+    t.integer "comunicado_anterior_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["comunicado_anterior_id"], name: "index_comunicados_on_comunicado_anterior_id"
+    t.index ["creador_id"], name: "index_comunicados_on_creador_id"
+    t.index ["receptor_id"], name: "index_comunicados_on_receptor_id"
+  end
 
   create_table "personas", force: :cascade do |t|
     t.string "nombre"
@@ -19,4 +32,7 @@ ActiveRecord::Schema.define(version: 2021_06_26_113122) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "comunicados", "comunicados", column: "comunicado_anterior_id"
+  add_foreign_key "comunicados", "personas", column: "creador_id"
+  add_foreign_key "comunicados", "personas", column: "receptor_id"
 end
