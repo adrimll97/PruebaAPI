@@ -21,3 +21,7 @@ end
     comunicado_anterior_id: Comunicado.ids.sample
   )
 end
+
+20.times do
+  Adjunto.create(comunicado_id: Comunicado.ids.sample)
+end
