@@ -7,5 +7,17 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 10.times do
-  Persona.create(nombre: Faker::Name.name, fecha_nacimiento: Faker::Date.birthday(min_age: 15, max_age: 30))
+  Persona.create(
+    nombre: Faker::Name.name,
+    fecha_nacimiento: Faker::Date.birthday(min_age: 15, max_age: 30))
+end
+
+15.times do
+  Comunicado.create(
+    creador_id: Persona.ids.sample,
+    receptor_id: Persona.ids.sample,
+    asunto: Faker::Lorem.word,
+    contenido: Faker::Lorem.sentence,
+    comunicado_anterior_id: Comunicado.ids.sample
+  )
 end
